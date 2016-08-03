@@ -1,8 +1,8 @@
 # videoPlayer0
  ## Button Mapping:
 	You will  likely want to remap buttons based on your needs. In order to do so you need to.
-	`button_loop = 22
-button_pause = 17
+	`button_loop = 22`
+`button_pause = 17
 button_next = 18
 button_previous = 4
 button_restart = 21`
