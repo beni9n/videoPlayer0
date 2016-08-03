@@ -1,5 +1,5 @@
 # videoPlayer0
- ## Button Mapping:
+## Button Mapping:
 	You will  likely want to remap buttons based on your needs. In order to do so you need to.
 	`button_loop = 22`</br>
 	`button_pause = 17`</br>
