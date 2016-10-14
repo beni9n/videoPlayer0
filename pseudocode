@@ -1,0 +1,114 @@
+// Script executes at startup!
+
+// THIS IS PSEUDOCODE!!
+
+
+import os
+
+.
+.
+.
+GPIO.setup(4, GPIO.IN)		// Previous Video
+GPIO.setup(17, GPIO.IN)	// Play/Pause Video
+GPIO.setup(18, GPIO.IN)	// Next Video
+GPIO.setup(21, GPIO.IN)	// Restart Video
+GPIO.setup(22, GPIO.IN)	// Loop 1 Video/Loop All Videos
+GPIO.setup(23, GPIO.OUT)	// LED Paused
+GPIO.setup(24, GPIO.OUT)	// LED Loop 1
+GPIO.setup(25, GPIO.OUT)	// LED Loop All
+
+int btnStatus = 0;
+
+Loop 1 LED 24 HIGH.
+Loop All LED 25 LOW.
+Paused LED 23 LOW.
+
+
+//	SETUP *********************************************
+
+
+// Create file to hold list of videos
+
+fileOut = open(‘KMKRout’, ‘a’)			// In what dir is this file created?
+
+// Open default video folder.
+
+for root, dirs, files in os.walk(“home/defaultVideoFolder”):		// Update path.
+
+// List all MP4 files 
+
+    for file in files:
+        if file.endswith(“.mp4”):
+             fileOut.write(os.path.join(root, file))
+
+// Alphabetize?
+
+//	LOOP ***********************************************
+
+// Iterate to first video.
+
+os.system('omxplayer -o hdmi intro.mp4 &')    // WRONG: How do I edit the command line for different file names?
+sleep(15)
+
+Loop() while listening for button presses.
+
+
+//	PLAY/PAUSE ****************************************
+
+if (GPIO.input(17) == False):
+	if(checkStatusOfOMXPlayer == Playing):
+		omxplayer Pause
+		Paused LED 23 HIGH.
+		Listen for button presses.
+	else
+		omxplayer Unpause
+		Paused LED 23 LOW.
+		Loop() while listening for button presses.
+
+
+//	NEXT **********************************************
+
+if (GPIO.input(18) == False):
+	omxplayer Stop
+	Iterate to next video.
+	omxplayer Play
+	Loop() while listening for button presses.
+
+
+//	PREVIOUS ******************************************
+
+if (GPIO.input(4) == False):
+	omxplayer Stop
+	Iterate to previous video.
+	omxplayer Play
+	Loop() while listening for button presses.
+
+
+// 	RESTART *******************************************
+
+if (GPIO.input(21) == False):
+	omxplayer Stop
+	omxplayer Play
+	Loop() while listening for button presses.
+
+
+//	LOOP 1, LOOP ALL **********************************
+
+if (GPIO.input(22) == False):
+	btnStatus = 1 * -1
+	Loop(btnStatus)
+	if(btnStatus == 0):
+		Loop 1 LED 24 HIGH.
+		Loop All LED 25 LOW.
+	else
+		Loop 1 LED 24 LOW.
+		Loop All LED 25 HIGH.
+	
+
+//	LOOP() FUNCTION **********************************
+
+Loop (int status)
+	if(status == 0):
+		Play current video in a loop.
+	else
+		Play all videos on list in a loop.
